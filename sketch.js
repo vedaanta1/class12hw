@@ -1,13 +1,16 @@
 var garden,rabbit;
 var gardenImg,rabbitImg;
 var apple, applepng;
-var leave, leaves;
+var leave, leaves, oleaves, rleaves;
+var rand;
 
 function preload(){
   gardenImg = loadImage("garden.png");
   rabbitImg = loadImage("rabbit.png");
   applepng = loadImage("apple.png");
-  leaves = loadImage("orangeLeaf.png");
+  leaves = loadImage("leaf.png",);
+  oleaves = loadImage("orangeleaf.png")
+  rleaves = loadImage("redimage.png")
 }
 
 function setup(){
@@ -32,17 +35,17 @@ function draw() {
   
   edges= createEdgeSprites();
   rabbit.collide(edges);
+  rabbit.x = World.mouseX
   
   var select_sprites = Math.round(random(1, 2));
 
-  if(frameCount % 80 == 0){
-  
+  if(frameCount % 60 == 0){
     if(select_sprites == 1){
-    create_appples();
+    create_leaves();
     }
 
     if(select_sprites == 2){
-    create_leaves();
+    create_appples();
     }
 
 
@@ -61,7 +64,25 @@ function create_appples(){
 
 function create_leaves(){
   leave = createSprite(random(50, 350), 40, 10, 10);
-  leave.addImage(leaves);
+  var leafs = Math.round(random(0, 2));
+    rand = Math.round(random(1, 3))
+    
+    
+    switch(rand){
+    case 1:
+     leave.addImage(leaves);
+      break;
+    case 2:
+      leave.addImage(oleaves);
+     break;
+    case 3:
+      leave.addImage(rleaves);
+    default:
+      break;
+    }
+  
+    
+
   leave.scale = 0.05;
   leave.velocityY = 2
 }
